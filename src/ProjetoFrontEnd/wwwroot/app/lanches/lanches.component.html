@@ -1,0 +1,48 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-horizontal">
+                <fieldset>
+                    <legend>Cadastro de Lanche</legend>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <a class="btn btn-default-btn-xs btn-success" (click)="add()">
+                                <i class="glyphicon glyphicon-plus"></i>
+                                Cadastrar novo lanche
+                            </a>
+                        </div>
+                    </div>
+                    <div class="error" *ngIf="error">{{error}}</div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>-</th>
+                    <th>Nome</th>
+                    <th>Ingredientes</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let lanche of lanches">
+                    <th>
+                        <button type="button" class="btn btn-info" (click)="edit(lanche)">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </button>
+                    </th>
+                    <th>{{lanche.nome}}</th>
+                    <th>
+                        <li *ngFor="let item of lanche.porcoes">
+                            {{item.quantidade}} {{item.ingrediente.nome}}
+                        </li>
+                    </th>
+                    <th>{{lanche.valor | currency:'BRL':true:'1.2-2'}}</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

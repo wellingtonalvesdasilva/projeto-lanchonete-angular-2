@@ -1,0 +1,73 @@
+﻿
+<div class="container" *ngIf="lanche">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-horizontal">
+                <fieldset>
+                    <legend>Cadastro de Lanche</legend>
+                    <div class="form-group col-md-12">
+                        <label class="col-md-3 control-label">Nome do Lanche</label>
+                        <div class="col-md-8">
+                            <input #ctrl="ngModel" [(ngModel)]="lanche.nome" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-2 col-md-6">
+
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Quantidade</th>
+                                    <th>Ingrediente</th>
+                                    <th>-</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        <input #qtdeDePorcao class="form-control" />
+                                    </th>
+                                    <th>
+                                        <select class="form-control" #modelIngrediente [(ngModel)]="ingrediente" >
+                                            <option *ngFor="let ingrediente of ingredientes" [ngValue]="ingrediente">{{ingrediente.nome}}</option>
+                                        </select>
+                                    </th>
+                                    <th>
+                                        <button type="button" class="btn btn-warning" (click)="addItem(qtdeDePorcao.value,modelIngrediente.value)">
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                        </button>
+                                    </th>
+                                </tr>
+
+                                <tr *ngFor="let porcao of lanche.porcoes">
+                                    <th>{{porcao.quantidade}}</th>
+                                    <th>
+                                        {{porcao.ingrediente.nome}}
+                                    </th>
+                                    <th>
+                                        <button type="button" class="btn btn-info" (click)="removeItem(porcao.id)">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </button>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="btn-save"></label>
+                        <div class="col-md-4">
+                            <a class="btn btn-default-btn-xs btn-danger" (click)="goBack()">
+                                <i class="glyphicon glyphicon-arrow-left"></i>
+                                Cancelar
+                            </a>
+                            <a class="btn btn-default-btn-xs btn-success" (click)="save()">
+                                <i class="glyphicon glyphicon-floppy-save"></i>
+                                Salvar
+                            </a>
+                        </div>
+                    </div>
+                    <div class="error" *ngIf="error">{{error}}</div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
